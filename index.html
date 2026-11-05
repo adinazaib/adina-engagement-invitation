@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adina & Aminur | Engagement Invitation</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ivory: #fdfaf6;
+  --cream: #f4e8dc;
+  --rose: #b47b78;
+  --burgundy: #702f3b;
+  --gold: #b08a56;
+  --ink: #4f3b38;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scene {
+  min-height: 100svh;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 20px;
+  background: radial-gradient(ellipse at center, #fffbf7 0%, #f4e8dd 100%);
+}
+
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(176,138,86,.4);
+  pointer-events: none;
+}
+
+.inner {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ENVELOPE SCENE */
+#envelopeScene {
+  background: linear-gradient(145deg, #ead9ca, #fbf2ea, #dac0b4);
+}
+
+.envelope {
+  position: relative;
+  width: min(84vw, 340px);
+  height: 220px;
+  margin: 65px auto 25px;
+  background: #c49a82;
+  border-radius: 6px;
+  box-shadow: 0 20px 45px rgba(80,42,37,.25);
+  perspective: 900px;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #cda78f, #a97869);
+  z-index: 1;
+  border-radius: 6px;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #d7b49c, #b98b78);
+  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+  z-index: 4;
+  border-radius: 6px;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 58%;
+  background: linear-gradient(145deg, #dfc0aa, #b88876);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  z-index: 6;
+  transition: transform 1.2s ease;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.wax {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c77c7b, #792e3c 75%);
+  border: 3px solid #d8b18a;
+  color: #f5dfc3;
+  font-family: 'Great Vibes', cursive;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(112,47,59,.4);
+  transition: opacity .5s, transform .5s;
+}
+
+.envelope.open .wax {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+.card {
+  position: absolute;
+  left: 6%;
+  width: 88%;
+  height: 185px;
+  bottom: 12px;
+  z-index: 3;
+  background: #fffdf9;
+  border: 1px solid var(--gold);
+  box-shadow: 0 8px 25px rgba(84,59,53,.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  transition: transform 1.3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.envelope.open .card {
+  transform: translateY(-165px);
+}
+
+.card span {
+  color: var(--burgundy);
+  font-size: 26px;
+  font-family: 'Great Vibes', cursive;
+}
+
+.tap-text {
+  letter-spacing: 3px;
+  font-size: 13px;
+  color: #744d48;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .4; }
+}
+
+/* BUTTONS */
+.scroll-btn, .action-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 11px 24px;
+  border: 1px solid var(--gold);
+  color: var(--burgundy);
+  background: #fffaf5;
+  font-family: inherit;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all .3s ease;
+  box-shadow: 0 4px 12px rgba(176,138,86,.15);
+}
+
+.scroll-btn:hover, .action-btn:hover {
+  background: var(--burgundy);
+  color: #fff;
+  border-color: var(--burgundy);
+}
+
+.btn-primary {
+  background: var(--burgundy);
+  color: #fff;
+  border: 1px solid var(--burgundy);
+}
+
+.btn-primary:hover {
+  background: #56232d;
+  color: #fff;
+}
+
+/* MUSIC TOGGLE */
+.music-toggle {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 100;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  background: #fffdf9;
+  color: var(--burgundy);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(112,47,59,.2);
+  transition: transform .2s ease;
+}
+
+/* INVITATION SCENE */
+.bismillah {
+  font-family: 'Amiri', serif;
+  font-size: 26px;
+  color: var(--burgundy);
+  margin-bottom: 6px;
+}
+
+.small-copy {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 12px auto;
+  max-width: 390px;
+}
+
+.eyebrow {
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin: 18px 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.name {
+  font-size: clamp(26px, 7vw, 38px);
+  font-weight: 600;
+  color: var(--burgundy);
+  letter-spacing: 1.5px;
+  line-height: 1.15;
+  margin: 8px 0;
+}
+
+.parents {
+  font-size: 16px;
+  line-height: 1.45;
+  color: #634d4a;
+}
+
+.amp {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  color: var(--gold);
+  margin: 6px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DATE SCRATCH SCENE */
+.section-title {
+  color: var(--burgundy);
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.scratch-hint {
+  font-size: 17px;
+  color: var(--burgundy);
+  margin: 0 auto 10px;
+}
+
+.scratch-box {
+  position: relative;
+  width: min(85vw, 330px);
+  height: 210px;
+  margin: 16px auto;
+  border: 1px solid var(--gold);
+  background: #fffdf9;
+  box-shadow: 0 10px 30px rgba(99,65,58,.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.date-under {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--burgundy);
+  padding: 10px;
+}
+
+.date-under .date {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.date-under .time {
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.scratch-fallback-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: #8c605a;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 6px;
+  padding: 4px;
+}
+
+/* VENUE */
+.venue-card {
+  border: 1px solid var(--gold);
+  padding: 35px 20px;
+  background: rgba(255, 252, 248, .85);
+  box-shadow: 0 15px 35px rgba(102,69,58,.12);
+  border-radius: 8px;
+}
+
+.venue-name {
+  font-size: 28px;
+  color: var(--burgundy);
+  margin: 14px 0 8px;
+  font-weight: 600;
+}
+
+.venue-address {
+  font-size: 20px;
+  line-height: 1.45;
+  color: #553e3b;
+}
+
+/* CLOSING */
+.closing-title {
+  font-family: 'Great Vibes', cursive;
+  color: var(--burgundy);
+  font-size: 46px;
+}
+
+.closing-copy {
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  color: var(--burgundy);
+  margin-top: 25px;
+}
+
+@media (max-height: 700px) {
+  .envelope { margin-top: 35px; }
+  .scratch-box { height: 180px; }
+  .name { font-size: 26px; }
+  .section-title { font-size: 34px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIXED AUDIO PLAYER -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c6799849.mp3?filename=tender-feeling-110034.mp3" type="audio/mpeg">
+</audio>
+<button class="music-toggle" id="musicBtn" aria-label="Toggle background music">♪</button>
+
+<!-- PAGE 1: ENVELOPE -->
+<section class="scene" id="envelopeScene">
+  <div class="inner">
+    <div class="section-title">An invitation for you</div>
+
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="card">
+        <span>You're invited</span>
+      </div>
+      <div class="envelope-front"></div>
+      <div class="flap"></div>
+      <button class="wax" id="openSeal" aria-label="Open invitation">A</button>
+    </div>
+
+    <p class="tap-text" id="tapText">Tap the seal to open</p>
+
+    <button class="scroll-btn" id="continueBtn" hidden onclick="goTo('invitationScene')">
+      Open Invitation ↓
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 2: MAIN INVITATION -->
+<section class="scene" id="invitationScene">
+  <div class="inner">
+    <div class="bismillah reveal">
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    </div>
+
+    <p class="small-copy reveal">
+      With the blessings of Allah Almighty and the love &amp; duas of our families,
+      we joyfully invite you to grace the occasion of the
+    </p>
+
+    <div class="eyebrow reveal">Engagement Ceremony</div>
+
+    <div class="name reveal">
+      MOHAMMAD<br>AMIN-UR-REHMAN
+    </div>
+
+    <p class="parents reveal">
+      Son of Mohammad Afzal ur Rehman Sir<br>
+      <small style="color:#80635f;">(Akot file, Akola)</small>
+    </p>
+
+    <div class="amp reveal">&</div>
+
+    <div class="name reveal">ADINA ZAIB</div>
+
+    <p class="parents reveal">
+      Daughter of Syed Imran Ali Sir<br>
+      <small style="color:#80635f;">(Barshitakli)</small>
+    </p>
+
+    <button class="scroll-btn reveal" onclick="goTo('dateScene')">
+      Discover the Date ↓
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 3: SCRATCH TO REVEAL DATE -->
+<section class="scene" id="dateScene">
+  <div class="inner">
+    <div class="section-title">Save the Date</div>
+
+    <p class="scratch-hint">Scratch gently to reveal our special day</p>
+
+    <div class="scratch-box">
+      <div class="date-under">
+        <div class="date">13 JANUARY 2027</div>
+        <div class="time">6:00 PM ONWARDS</div>
+      </div>
+      <canvas id="scratchCanvas"></canvas>
+    </div>
+
+    <button class="scratch-fallback-btn" id="revealBtn" onclick="forceRevealDate()">
+      Can't scratch? Tap here to reveal date
+    </button>
+
+    <div style="margin-top: 14px;">
+      <a class="action-btn"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Engagement:+Adina+%26+Aminur&dates=20270113T123000Z/20270113T163000Z&details=Engagement+Ceremony+of+Adina+Zaib+and+Mohammad+Amin-ur-Rehman&location=Dayawan+Function+Hall,+Barshitakli,+Akola"
+         target="_blank" rel="noopener">
+        📅 Add to Google Calendar
+      </a>
+    </div>
+
+    <button class="scroll-btn" onclick="goTo('venueScene')">
+      View Venue ↓
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 4: VENUE -->
+<section class="scene" id="venueScene">
+  <div class="inner">
+    <div class="venue-card">
+      <div class="section-title">The Celebration</div>
+
+      <div class="venue-name">DAYAWAN FUNCTION HALL</div>
+
+      <div class="venue-address">
+        Barshitakli, District Akola,<br>
+        Maharashtra
+      </div>
+
+      <a class="action-btn btn-primary"
+         href="https://www.google.com/maps/search/?api=1&query=Dayawan+Function+Hall+Barshitakli+Akola"
+         target="_blank" rel="noopener" style="margin-top: 20px;">
+        📍 Open in Google Maps
+      </a>
+    </div>
+
+    <button class="scroll-btn" onclick="goTo('closingScene')">
+      One Last Note ↓
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 5: CLOSING & RSVP -->
+<section class="scene" id="closingScene">
+  <div class="inner">
+    <div class="closing-title">With Love &amp; Duas</div>
+
+    <p class="closing-copy">
+      Your presence would mean the world to us as we embark on this blessed new journey.
+      Please grace the occasion and bless us with your prayers.
+    </p>
+
+    <div class="signature">Adina &amp; Aminur</div>
+
+    <p class="small-copy" style="margin-top: 15px; color:#855d57;">
+      We look forward to welcoming you!
+    </p>
+
+    <a class="action-btn"
+       href="https://wa.me/?text=Assalamu%20Alaikum!%20Thank%20you%20for%20the%20invitation.%20I/We%20will%20delightfully%20attend%20the%20Engagement%20Ceremony%20of%20Adina%20%26%20Aminur%20on%2013th%20Jan%202027."
+       target="_blank" rel="noopener" style="margin-top: 20px;">
+      💬 RSVP on WhatsApp
+    </a>
+  </div>
+</section>
+
+<script>
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
+// Background Music
+const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
+let isPlaying = false;
+
+function toggleMusic() {
+  if (isPlaying) {
+    bgMusic.pause();
+    musicBtn.textContent = "♪";
+    isPlaying = false;
+  } else {
+    bgMusic.play().then(() => {
+      musicBtn.textContent = "⏸";
+      isPlaying = true;
+    }).catch(() => {});
+  }
+}
+musicBtn.addEventListener("click", toggleMusic);
+
+// Envelope Logic
+const envelope = document.getElementById("envelope");
+const seal = document.getElementById("openSeal");
+const tapText = document.getElementById("tapText");
+const continueBtn = document.getElementById("continueBtn");
+
+seal.addEventListener("click", () => {
+  envelope.classList.add("open");
+  tapText.textContent = "Invitation opened";
+  
+  if (!isPlaying) toggleMusic();
+
+  setTimeout(() => {
+    continueBtn.hidden = false;
+  }, 1300);
+});
+
+// Reveal Animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll(".reveal");
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("show");
+        }, index * 350);
+      });
+    }
+  });
+}, { threshold: 0.25 });
+
+observer.observe(document.getElementById("invitationScene"));
+
+// Scratch Logic
+const canvas = document.getElementById("scratchCanvas");
+const ctx = canvas.getContext("2d");
+let isScratching = false;
+let scratchedPoints = 0;
+let isUncovered = false;
+
+function initCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+  gradient.addColorStop(0, "#c49a82");
+  gradient.addColorStop(0.5, "#e7c7b2");
+  gradient.addColorStop(1, "#ad796e");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, rect.width, rect.height);
+
+  ctx.fillStyle = "#702f3b";
+  ctx.font = "26px 'Great Vibes', cursive";
+  ctx.textAlign = "center";
+  ctx.fillText("Scratch Here ♡", rect.width / 2, rect.height / 2 + 8);
+
+  ctx.globalCompositeOperation = "destination-out";
+}
+
+function scratchAt(e) {
+  if (!isScratching || isUncovered) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+  const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+  ctx.beginPath();
+  ctx.arc(x, y, 22, 0, Math.PI * 2);
+  ctx.fill();
+
+  scratchedPoints++;
+  if (scratchedPoints > 28) checkScratchProgress();
+}
+
+function checkScratchProgress() {
+  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let clearPixels = 0;
+  for (let i = 3; i < imgData.data.length; i += 16) {
+    if (imgData.data[i] < 128) clearPixels++;
+  }
+  const ratio = clearPixels / (imgData.data.length / 16);
+  if (ratio > 0.35) forceRevealDate();
+}
+
+function forceRevealDate() {
+  if (isUncovered) return;
+  isUncovered = true;
+  canvas.style.transition = "opacity 0.7s ease";
+  canvas.style.opacity = "0";
+  const fallback = document.getElementById("revealBtn");
+  if (fallback) fallback.style.display = "none";
+  setTimeout(() => {
+    canvas.style.display = "none";
+  }, 700);
+}
+
+canvas.addEventListener("pointerdown", (e) => {
+  isScratching = true;
+  canvas.setPointerCapture(e.pointerId);
+  scratchAt(e);
+});
+
+canvas.addEventListener("pointermove", scratchAt);
+canvas.addEventListener("pointerup", () => { isScratching = false; });
+canvas.addEventListener("pointercancel", () => { isScratching = false; });
+
+window.addEventListener("DOMContentLoaded", initCanvas);
+window.addEventListener("resize", () => {
+  if (!isUncovered) initCanvas();
+});
+</script>
+
+</body>
+</html>
